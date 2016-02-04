@@ -1,4 +1,4 @@
-# gcloud_alignment
+# Sequence Analysis Pipelines on Google Cloud
 A small experiment running an alignment pipeline using the google compute engine.
 
 This uses the Google Compute Engine python client. These docs are very helpful:
