@@ -9,7 +9,9 @@ import subprocess
 import time
 
 # number of concurrent instances reading from a disk
-instance_num = 100
+instance_num = 1
+region_num = 100
+
 
 def __main__():
     """
@@ -62,12 +64,16 @@ def __main__():
     print 'Executing samtools on each machine...'
     # execute our samtools command on each instance
     for instance in instances:
-        flagstat_cmd = ('/home/trubetsk/flagstat_random_5mb.py '
-                    '--vm-name {vm_name} --instance-number {instance_num} '.format(vm_name=instance, instance_num=instance_num))
-        gcloud_cmd = 'gcloud compute ssh trubetsk@{instance} --project {project} --zone {zone} --command \'{command}\' &'.format(instance=instance,
-                                                                                                        project=default_project,
-                                                                                                        zone=default_zone,
-                                                                                                        command=flagstat_cmd)
+        flagstat_cmd = ('/home/trubetsk/gcloud_sequencing_pipelines/experimental_scripts/flagstat_random_5mb.py '
+                        '--vm-name {vm_name} --instance-number {instance_num} '
+                        '--region-number {region_num}').format(vm_name=instance,
+                                                               instance_num=instance_num,
+                                                               region_num=region_num)
+        gcloud_cmd = ('gcloud compute ssh trubetsk@{instance} '
+                      '--project {project} --zone {zone} --command \'{command}\' &').format(instance=instance,
+                                                                                            project=default_project,
+                                                                                            zone=default_zone,
+                                                                                            command=flagstat_cmd)
         print gcloud_cmd
         subprocess.call(gcloud_cmd, shell=True)
 

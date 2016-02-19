@@ -19,3 +19,6 @@ gcloud compute instances attach-disk $IMAGE_NAME   \
 sudo mkdir $MOUNT_POINT
 sudo mount -o ro /dev/disk/by-id/google-input $MOUNT_POINT
 sudo chmod -R 777 $MOUNT_POINT
+
+# clone our git repository
+git clone https://github.com/vtrubets/gcloud_sequencing_pipelines.git
