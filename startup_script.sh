@@ -21,4 +21,6 @@ sudo mount -o ro /dev/disk/by-id/google-input $MOUNT_POINT
 sudo chmod -R 777 $MOUNT_POINT
 
 # clone our git repository
-git clone https://github.com/vtrubets/gcloud_sequencing_pipelines.git
+sudo apt-get install -y git
+git clone https://github.com/vtrubets/gcloud_sequencing_pipelines.git /home/trubetsk/gcloud_sequencing_pipelines/
+chmod -R 777 /home/trubetsk/gcloud_sequencing_pipelines/

@@ -8,9 +8,8 @@ from googleapiclient_create_destroy_instance import check_instance
 import subprocess
 import time
 
-# number of concurrent instances reading from a disk
-instance_num = 1
-region_num = 100
+instance_num = 1  # number of concurrent instances reading from a disk
+region_num = 100  # number of sequential random regions to read
 
 
 def __main__():
@@ -45,18 +44,20 @@ def __main__():
         #   attach input disk
         #   format and mount disk
         instance_name = 'reader-{}'.format(reader_vm)
-        create_operation = create_instance(compute=gce,
-                                           project=default_project,
-                                           zone=default_zone,
-                                           name=instance_name,
-                                           input_disk='hg00096-chr20-bam',
-                                           mount_point='/home/trubetsk/input-data/')
+        create_instance(compute=gce,
+                        project=default_project,
+                        zone=default_zone,
+                        name=instance_name,
+                        input_disk='na12878-bam',
+                        mount_point='/home/trubetsk/input-data/')
         instances.append(instance_name)
         time.sleep(1)
 
-
     for instance in instances:
-        instance_found = check_instance(name=instance, compute=gce, project=default_project, zone=default_zone)
+        instance_found = check_instance(name=instance,
+                                        compute=gce,
+                                        project=default_project,
+                                        zone=default_zone)
         if not instance_found:
             Exception('Instance not found.')
     print '\t Done.'
