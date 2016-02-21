@@ -18,7 +18,7 @@ def __main__(vm_name, instance_num, num_regions):
     for i in xrange(int(num_regions)):
         # select a random 5MB region to pull reads from
         regions = {line.split()[0]:line.split()[1] for line in open(os.path.join(os.path.dirname(__file__),
-                                                                                 '../data/hs37d5.fa.fai', 'r'))}
+                                                                                 '../data/hs37d5.fa.fai'), 'r')}
         rnd_chr = random.choice([str(x) for x in xrange(1,23)])
         rnd_start = random.randrange(1, int(regions[rnd_chr]) - 10000000)
         rnd_end = rnd_start + 10000000
@@ -27,7 +27,7 @@ def __main__(vm_name, instance_num, num_regions):
         region = '{chr}:{start}-{end}'.format(chr=rnd_chr, start=str(rnd_start), end=str(rnd_end))
         samtools_bin = '/home/trubetsk/samtools'
         bam_path = '/home/trubetsk/input-data/NA12878.mapped.ILLUMINA.bwa.CEU.low_coverage.20121211.bam'
-        gcs_log = 'gs://variant-calling/{run_id}_{region}_{num_jobs}-instance.log'.format(run_id=vm_name,
+        gcs_log = 'gs://variant-calling/{run_id}_region-{region}_{num_jobs}-instance.log'.format(run_id=vm_name,
                                                                                           num_jobs=instance_num,
                                                                                           region=i)
         samtools_cmd = ('{samtools_bin} view -bh {bam_path} {region} | '
