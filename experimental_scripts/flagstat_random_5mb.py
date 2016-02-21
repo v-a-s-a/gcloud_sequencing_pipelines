@@ -17,7 +17,7 @@ def __main__(vm_name, instance_num, num_regions):
 
     for i in xrange(int(num_regions)):
         # select a random 5MB region to pull reads from
-        regions = {line.split()[0]:line.split()[1] for line in open('data/hs37d5.fa.fai')}
+        regions = {line.split()[0]:line.split()[1] for line in open('../data/hs37d5.fa.fai')}
         rnd_chr = random.choice([str(x) for x in xrange(1,23)])
         rnd_start = random.randrange(1, int(regions[rnd_chr]) - 10000000)
         rnd_end = rnd_start + 10000000
