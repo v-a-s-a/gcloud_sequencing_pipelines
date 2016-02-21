@@ -54,6 +54,10 @@ def create_instance(compute, project, zone, name, input_disk='', mount_point='')
             }
         }
     ],
+    'scheduling':
+  {
+    'preemptible': 'true'
+  },
     # Specify a network interface with NAT to access the public
     # internet.
     'networkInterfaces': [{
@@ -143,7 +147,7 @@ def check_instance(name, compute, zone, project, tries = 100):
                     return True
         else:
             res = False
-        time.sleep(1)
+        time.sleep(3)
 
     return res
 
