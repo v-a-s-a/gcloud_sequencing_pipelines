@@ -8,8 +8,8 @@ from googleapiclient_create_destroy_instance import check_instance
 import subprocess
 import time
 
-instance_num = 1  # number of concurrent instances reading from a disk
-region_num = 100  # number of sequential random regions to read
+instance_num = 2  # number of concurrent instances reading from a disk
+region_num = 10  # number of sequential random regions to read
 
 
 def __main__():
@@ -39,7 +39,7 @@ def __main__():
 
     # create instances
     instances = list()
-    for reader_vm in xrange(instance_num):
+    for reader_vm in xrange(int(instance_num)):
         # create instance with startup script
         #   attach input disk
         #   format and mount disk
